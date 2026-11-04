@@ -2,6 +2,7 @@
 
 | Model name | Resolution (nm) | Throughput (wafers/hr) | Cost (USD) |
 |---|---|---|---|
+| HackerFab litho (projection direct-write) | 5000 | ~0.003 (100 mm wafer, calc.) | ~$2k |
 | ASML TWINSCAN EXE:5200B (High-NA EUV) | 8 | 175 (@ 50 mJ/cm²) | ~$380M |
 | Durham Magneto Optics MicroWriter ML3 Pro | 600 (400 option) | ~0.1–0.4 (100 mm wafer, est.) | ~$10⁵ (est. $0.2–0.5M) |
 | Raith VOYAGER (50 kV EBL) | ≤8 | ≲0.02 (full 100 mm wafer, est.) | ~$10⁶ (est. $1–5M) |
@@ -10,6 +11,13 @@
 "est." = my own estimate. I couldn't find a published number, so this is an order of magnitude or a bound. Derivations are below.
 
 ## Notes and sources
+
+### 0. HackerFab litho
+- The resolution (5 µm) and cost (<$2k) are the user's figures; see [content_my.md](content_my.md).
+- Throughput (calc.): one exposure covers a 1 mm wide patch at 16:9, so 1 × 0.5625 mm = 0.5625 mm², and takes 90 s. That works out to ≈0.375 mm²/min.
+  - A 100 mm wafer is 7,854 mm², or ~13,960 patches. At 90 s each that is ~349 h, about 14.5 days, so ≈0.003 wph.
+  - This ignores stage stepping and alignment overhead, so it is an upper bound.
+  - For comparison, the MicroWriter at 1 µm writes 50 mm²/min, ~130× faster.
 
 ### 1. ASML TWINSCAN EXE:5200B
 - 0.55 NA High-NA EUV. Intel completed acceptance testing in Dec 2025, so this is the newest EUV tool in production. ASML lists 8 nm resolution and 175 wph at a 50 mJ/cm² dose. [ASML product page](https://www.asml.com/en/products/euv-lithography-systems/twinscan-exe-5200b)
