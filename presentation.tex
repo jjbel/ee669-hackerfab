@@ -1,0 +1,227 @@
+\documentclass[9pt, compress, aspectratio=169]{beamer}
+
+\usepackage[sfdefault]{plex-sans}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{qrcode}
+
+\definecolor{links}{HTML}{F54927}
+\hypersetup{colorlinks,linkcolor=,urlcolor=links,citecolor=links}
+
+% Allow for denser spacing globally
+\setbeamertemplate{itemize/enumerate body begin}{\setlength{\leftmargini}{1.5em}\setlength{\itemsep}{2pt}}
+\setbeamertemplate{navigation symbols}{}
+
+% Numbered references: [1], [2], ... instead of beamer's book icons
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+\setbeamertemplate{frametitle continuation}{}
+\setbeamerfont{bibliography item}{size=\scriptsize}
+\setbeamerfont{bibliography entry author}{size=\scriptsize}
+\setbeamerfont{bibliography entry title}{size=\scriptsize}
+\setbeamerfont{bibliography entry location}{size=\scriptsize}
+\setbeamerfont{bibliography entry note}{size=\scriptsize}
+
+% Add footer with title and slide number
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=.7\paperwidth,ht=3ex,dp=2ex,left,leftskip=4ex]{author in head/foot}%
+      \footnotesize HackerFab IITB: EE669 Guest Lecture
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.3\paperwidth,ht=3ex,dp=2ex,right,rightskip=4ex]{page number in head/foot}%
+      \footnotesize \insertframenumber{} / \inserttotalframenumber
+  \end{beamercolorbox}}%
+  \vskip1ex%
+}
+
+% Custom commands for side-by-side content
+\newcommand{\splitslide}[3][0.7]{
+  \begin{columns}[T]
+    \begin{column}{#1\textwidth}
+      #2
+    \end{column}
+    \begin{column}{\dimexpr\textwidth-#1\textwidth\relax}
+      \centering
+      #3
+    \end{column}
+  \end{columns}
+}
+
+\newcommand{\slidepic}[2]{
+  \includegraphics[width=0.95\linewidth,keepaspectratio]{#1}\\
+  \vspace{0.06em}
+  {\scriptsize \textit{#2}}\\
+}
+
+% Thumbnail for table cells
+\newcommand{\thumb}[1]{\includegraphics[height=0.95cm,width=1.9cm,keepaspectratio]{#1}}
+
+% Wrapper for slides
+\newenvironment{slide}[1]{
+  \begin{frame}[environment=slide, t]
+    \frametitle{#1}
+  }{
+  \end{frame}
+}
+
+\begin{document}
+
+%% ---------------------------------------------------------------- Title
+\begin{frame}[t]
+  \vspace{-0.3cm}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \begin{flushleft}
+        {\footnotesize HackerFab Guest Lecture \textbar{} 05-11-2026 \textbar{} Jai Bellare}\\[2pt]
+        {\footnotesize For EE669 \textbar{} Prof.\ Anil Kottantharayil}\\[0.8cm]
+        {\Large \textbf{Design and Development of a \textless\$2000 Direct-Write Photolithography System}}\\[0.8cm]
+        \includegraphics[width=0.45\linewidth]{media_claude/template/logo.png}\\[0.4cm]
+        \qrcode[nolink,height=2cm]{https://hackerfabiitb.org/}\\[2pt]
+        {\scriptsize \href{https://hackerfabiitb.org/}{hackerfabiitb.org}}
+      \end{flushleft}
+    \end{column}
+    \begin{column}{0.52\textwidth}
+      \centering
+      \vspace{0.4cm}
+      \slidepic{media_my/04_lab_photos/litho setup latest.jpg}{HackerFab IITB direct-write photolithography setup}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+%% ---------------------------------------------------------------- About (slide 1 of funding_proposal/presentation.tex)
+\begin{frame}[t]
+  \vspace{-0.5cm} % Reduce margin above the title
+  \begin{columns}[T]
+    \begin{column}{0.65\textwidth}
+      \begin{flushleft}
+        {\Large \textbf{HackerFab IITB}} \\
+        {\normalsize \vspace{2pt} \textit{democratizing semiconductor fabrication}} \\
+      \end{flushleft}
+    \end{column}
+    \begin{column}{0.35\textwidth}
+      \begin{flushright}
+        \vspace{-0.3cm}
+        \includegraphics[width=0.6\linewidth]{media_claude/template/logo.png}\\[0.2em]
+        {\scriptsize \href{https://hackerfabiitb.github.io/}{hackerfabiitb.github.io}\\
+          \vspace{-0.1cm}
+        \href{mailto:hackerfabiitb@gmail.com}{hackerfabiitb@gmail.com}}
+      \end{flushright}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.1cm}
+  \hrule
+  \vspace{0.15cm}
+
+  \splitslide[0.8]{
+    {\small
+      \begin{enumerate}
+          \setlength\itemsep{2pt}
+        \item \textbf{Who we are:}  A student-led R\&D project guided by IIT Bombay SemiX faculty.
+          We are building low-cost open-source student-accessible tools for making chips and transistors.
+        \item \textbf{Our Mission:} To develop a low-cost DIY semiconductor fab capable of making working transistors, whose open-source recipe can be replicated and developed by colleges across India.
+        \item \textbf{Our Vision:} To empower every EE student in India to learn to fabricate semiconductor devices (like a Tinkerer's Lab or Makerspace for semiconductors)
+        \item \textbf{Advised by SemiX faculty:} Prof. Swaroop Ganguly, Prof. Udayan Ganguly, Prof. Anil Kottantharayil and Prof. Veeresh Deshpande
+        \item \textbf{Recognition:}\par
+          \begin{minipage}[t]{0.63\linewidth}
+            \begin{enumerate}
+              \item won User Design Track at 39th International Conf. On VLSI Design for our DIY toolkit \& \textbf{Fab-in-a-Box} proposal
+              \item \href{https://swarajyamag.com/technology/inside-hackerfab-iitb-indias-first-student-led-chip-fab}{Interview and article by Swarajya Magazine} \cite{swarajya}
+              \item \href{https://x.com/RuntimeBRT/status/2070061936407195654}{Deep-dive video by RuntimeBRT} \cite{runtime}
+            \end{enumerate}
+          \end{minipage}\hfill
+          % headline strip cropped out of the full Swarajya article screenshot
+          \begin{minipage}[t]{0.35\linewidth}
+            \vspace{0pt}
+            \includegraphics[width=\linewidth,trim=0 811bp 0 0,clip]{media_claude/template/2026-08-17_01-57-42 swarajya.png}
+          \end{minipage}
+    \end{enumerate}}
+  }{
+    \slidepic{media_claude/template/litho.jpg}{Photolithography setup}
+    \slidepic{media_claude/template/01 usaf.jpg}{Micron-scale pattern}
+  }
+\end{frame}
+
+%% ---------------------------------------------------------------- Range of litho systems
+\begin{slide}{Range of Lithography Systems}
+  \centering
+  \vspace{-0.2cm}
+  {\footnotesize
+    \renewcommand{\arraystretch}{1.05}
+    \begin{tabular}{>{\centering\arraybackslash}m{0.5cm} >{\raggedright\arraybackslash}m{3.4cm} >{\centering\arraybackslash}m{1.7cm} >{\centering\arraybackslash}m{2.0cm} >{\centering\arraybackslash}m{1.8cm} >{\centering\arraybackslash}m{2.0cm}}
+      \toprule
+      \textbf{Sr No} & \textbf{Tool Name} & \textbf{Resolution} & \textbf{Throughput (wafers/hr)} & \textbf{Cost (USD)} & \textbf{Image} \\
+      \midrule
+      1 & ASML TWINSCAN EXE:5200B \newline {\scriptsize High-NA EUV scanner} \cite{asml,toms}
+        & 8 nm & 175 & $\sim$\$380M & \thumb{media_claude/asml_exe5200b.png} \\
+      2 & IMS MBMW-101 / -301 \newline {\scriptsize multi-beam mask writer} \cite{ims,semieng,dataintelo}
+        & 14 nm & $\sim$0.1 \newline {\scriptsize \emph{masks}/hr} & \$30--80M & \thumb{media_claude/ims_mbmw101.jpg} \\
+      3 & Raith VOYAGER \newline {\scriptsize 50 kV e-beam lithography} \cite{raith}
+        & $\leq$8 nm & $\lesssim$0.02$^{*}$ & $\sim$\$1--5M$^{*}$ & \thumb{media_claude/raith_voyager.jpg} \\
+      4 & Durham Magneto Optics MicroWriter ML3 Pro \newline {\scriptsize maskless laser direct-write} \cite{dmo,nus}
+        & 0.6 µm & $\sim$0.1--0.4$^{*}$ & $\sim$\$0.2--0.5M$^{*}$ & \thumb{media_claude/dmo_ml3_pro_ntu_install.jpg} \\
+      5 & \textbf{HackerFab IITB Litho} \newline {\scriptsize DMD projection direct-write}
+        & 5 µm & $\sim$0.003$^{\dagger}$ & \textbf{\textless\$2k} & \thumb{media_my/04_lab_photos/litho setup latest.jpg} \\
+      \bottomrule
+    \end{tabular}
+  }
+
+  \vspace{0.3cm}
+  \raggedright
+  {\scriptsize
+    Throughput for a 100 mm wafer. $^{*}$Estimated: no published price; throughput from write speed or beam current.\\
+    $^{\dagger}$90 s per 1 mm $\times$ 0.56 mm (16:9) field $\Rightarrow$ $\sim$13{,}960 fields $\approx$ 349 h per wafer, excluding stage overhead.
+  }
+\end{slide}
+
+%% ---------------------------------------------------------------- ASML EUV
+\begin{slide}{ASML EUV}
+  \centering
+  \includegraphics[width=0.8\linewidth,height=0.72\textheight,keepaspectratio]{media_claude/asml_euv_cnbc.jpg}\\
+  {\scriptsize \textit{ASML NXE:3400B EUV scanner (CNBC)} \cite{cnbc}}
+\end{slide}
+
+%% ---------------------------------------------------------------- HackerFab Litho
+\begin{slide}{HackerFab Litho}
+  \centering
+  \includegraphics[width=0.9\linewidth,height=0.75\textheight,keepaspectratio]{media_my/04_lab_photos/litho setup latest.jpg}\\
+  {\scriptsize \textit{HackerFab IITB direct-write photolithography setup}}
+\end{slide}
+
+%% ---------------------------------------------------------------- DMD
+\begin{slide}{Digital Micromirror Device (DMD)}
+  \centering
+  \includegraphics[height=0.72\textheight,keepaspectratio]{media_claude/dmd_ieee_spectrum.jpg}\\
+  {\scriptsize \textit{Close-up of DMD micromirror array (IEEE Spectrum)} \cite{ieeedmd}}
+\end{slide}
+
+%% ---------------------------------------------------------------- Thanks
+\begin{frame}[c]
+  \centering
+  {\Huge \textbf{Thank you!}}\\[0.6cm]
+  {\Large Questions?}\\[0.8cm]
+  \qrcode[nolink,height=1.8cm]{https://hackerfabiitb.org/}\\[2pt]
+  {\scriptsize \href{https://hackerfabiitb.org/}{hackerfabiitb.org}}
+\end{frame}
+
+%% ---------------------------------------------------------------- References
+\begin{frame}[t, allowframebreaks]
+  \frametitle{References}
+  \begin{thebibliography}{99}
+    \bibitem{asml} ASML, ``TWINSCAN EXE:5200B'' product page. \url{https://www.asml.com/en/products/euv-lithography-systems/twinscan-exe-5200b}
+    \bibitem{toms} Tom's Hardware, ``ASML's roadmap for chipmaking lithography tools examined.'' \url{https://tomshardware.com/tech-industry/semiconductors/asml-lithograpy-roadmap-examined-from-duv-to-hyper-na}
+    \bibitem{ims} IMS Nanofabrication, ``Products: Multi-Beam Mask Writer.'' \url{https://www.ims.co.at/en/products/}
+    \bibitem{semieng} Semiconductor Engineering, ``Multi-Beam Mask Writing Finally Comes Of Age.'' \url{https://semiengineering.com/multi-beam-mask-writing-finally-comes-of-age}
+    \bibitem{dataintelo} Dataintelo, ``Multibeam Mask Writers Market Research Report.'' \url{https://dataintelo.com/report/global-multi-beam-mask-writer-market}
+    \bibitem{raith} Raith, ``VOYAGER: e-beam lithography system.'' \url{https://raith.com/products/voyager/}
+    \bibitem{dmo} Durham Magneto Optics, ``MicroWriter ML3 Pro.'' \url{https://www.durhammagnetooptics.com/?product=microwriter}
+    \bibitem{nus} NUS E6 Nanofab, ``MicroWriter: Durham Magneto Optics ML3 Pro.'' \url{https://cde.nus.edu.sg/e6nanofab/microwriter-durham-magneto-optics-ml3-pro-class-10}
+    \bibitem{cnbc} CNBC, image of ASML NXE:3400B EUV scanner. \url{https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTk3zVFs2LxehMMxF3rxeBNKeXYQnqXPUWnc33hxwZ4Q&s=10}
+    \bibitem{ieeedmd} IEEE Spectrum, close-up of a digital micromirror device. \url{https://spectrum.ieee.org/media-library/close-up-of-microscopic-square-tiles-with-holes-in-the-center-arranged-in-a-grid-pattern.jpg?id=25583281}
+    \bibitem{swarajya} Swarajya, ``Inside HackerFab IITB: India's first student-led chip fab.'' \url{https://swarajyamag.com/technology/inside-hackerfab-iitb-indias-first-student-led-chip-fab}
+    \bibitem{runtime} RuntimeBRT, deep-dive video on HackerFab IITB. \url{https://x.com/RuntimeBRT/status/2070061936407195654}
+  \end{thebibliography}
+\end{frame}
+
+\end{document}
