@@ -67,7 +67,8 @@
 }
 
 % Image for table cells
-\newcommand{\thumb}[1]{\includegraphics[height=1.15cm,width=3.6cm,keepaspectratio]{#1}}
+% Image tile for the slide-3 grid: {number}{file}{label}
+\newcommand{\gridpic}[3]{\parbox[t]{2.6cm}{\centering\includegraphics[width=2.6cm,height=1.85cm,keepaspectratio]{#2}\\[1pt]{\tiny #1. #3}}}
 
 % Wrapper for slides
 \newenvironment{slide}[1]{
@@ -159,29 +160,38 @@
 %% ---------------------------------------------------------------- Range of litho systems
 \begin{slide}{Range of Lithography Systems}
   \vspace{0.25cm}
-  \centering
-  {\footnotesize
-    \setlength{\tabcolsep}{4pt}
-    \setlength{\aboverulesep}{0.2ex}
-    \setlength{\belowrulesep}{0.2ex}
-    \renewcommand{\arraystretch}{1.0}
-    \begin{tabular}{>{\centering\arraybackslash}m{0.5cm} >{\raggedright\arraybackslash}m{3.4cm} >{\centering\arraybackslash}m{1.4cm} >{\centering\arraybackslash}m{1.8cm} >{\centering\arraybackslash}m{1.6cm} >{\centering\arraybackslash}m{3.6cm}}
-      \toprule
-      \textbf{Sr No} & \textbf{Tool Name} & \textbf{Resolution (nm)} & \textbf{Throughput (wafers/hr)} & \textbf{Cost (USD)} & \textbf{Image} \\
-      \midrule
-      1 & ASML TWINSCAN EXE:5200B \newline {\scriptsize High-NA EUV scanner}\cite{asml,toms}
-        & 8 & 175 & $\sim$\$380M & \thumb{media_claude/asml_exe5200b.png} \\
-      2 & IMS MBMW-101 / -301 \newline {\scriptsize multi-beam mask writer}\cite{ims,semieng,dataintelo}
-        & 14 & $\sim$0.1 \newline {\scriptsize \emph{masks}/hr} & \$30--80M & \thumb{media_claude/ims_mbmw101.jpg} \\
-      3 & Raith VOYAGER \newline {\scriptsize 50 kV e-beam lithography}\cite{raith}
-        & $\leq$8 & $\lesssim$0.02 & $\sim$\$1--5M & \thumb{media_claude/raith_voyager.jpg} \\
-      4 & Durham Magneto Optics MicroWriter ML3 Pro \newline {\scriptsize maskless laser direct-write}\cite{dmo,nus}
-        & 600 & $\sim$0.1--0.4 & $\sim$\$0.2--0.5M & \thumb{media_claude/dmo_ml3_pro_ntu_install.jpg} \\
-      5 & \textbf{HackerFab IITB Litho} \newline {\scriptsize DMD projection direct-write}
-        & 5000 & $\sim$0.003 & \textbf{\textless\$2k} & \thumb{\setupimg} \\
-      \bottomrule
-    \end{tabular}
-  }
+  \begin{columns}[c]
+    \begin{column}{0.62\textwidth}
+      {\footnotesize
+        \setlength{\tabcolsep}{3.5pt}
+        \renewcommand{\arraystretch}{1.45}
+        \begin{tabular}{>{\centering\arraybackslash}m{0.35cm} >{\raggedright\arraybackslash}m{2.65cm} >{\centering\arraybackslash}m{1.15cm} >{\centering\arraybackslash}m{1.45cm} >{\centering\arraybackslash}m{1.6cm}}
+          \toprule
+          \textbf{Sr No} & \textbf{Tool Name} & \textbf{Resolution (nm)} & \textbf{Throughput (wafers/hr)} & \textbf{Cost (USD)} \\
+          \midrule
+          1 & ASML TWINSCAN EXE:5200B \newline {\scriptsize High-NA EUV scanner}\cite{asml,toms}
+            & 8 & 175 & $\sim$\$380M \\
+          2 & IMS MBMW-101 / -301 \newline {\scriptsize multi-beam mask writer}\cite{ims,semieng,dataintelo}
+            & 14 & $\sim$0.1 \newline {\scriptsize \emph{masks}/hr} & \$30--80M \\
+          3 & Raith VOYAGER \newline {\scriptsize 50 kV e-beam lithography}\cite{raith}
+            & $\leq$8 & $\lesssim$0.02 & $\sim$\$1--5M \\
+          4 & Durham Magneto Optics MicroWriter ML3 Pro \newline {\scriptsize maskless laser direct-write}\cite{dmo,nus}
+            & 600 & $\sim$0.1--0.4 & $\sim$\$0.2--0.5M \\
+          5 & \textbf{HackerFab IITB Litho} \newline {\scriptsize DMD projection direct-write}
+            & 3000 & $\sim$0.003 & \textbf{\textless\$2k} \\
+          \bottomrule
+        \end{tabular}
+      }
+    \end{column}
+    \begin{column}{0.38\textwidth}
+      \centering
+      \gridpic{1}{media_claude/asml_exe5200b.png}{ASML EXE:5200B}\hfill
+      \gridpic{2}{media_claude/ims_mbmw101.jpg}{IMS MBMW-101}\\[0.2cm]
+      \gridpic{3}{media_claude/raith_voyager_crop.jpg}{Raith VOYAGER}\hfill
+      \gridpic{4}{media_my/microwriter.png}{MicroWriter ML3}\\[0.2cm]
+      \gridpic{5}{\setupimg}{HackerFab Litho}
+    \end{column}
+  \end{columns}
 \end{slide}
 
 %% ---------------------------------------------------------------- ASML EUV
