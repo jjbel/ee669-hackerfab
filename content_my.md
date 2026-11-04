@@ -26,11 +26,26 @@ https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTk3zVFs2LxehMMxF3rxeBNKeX
 litho setup latest.jpg
 next to it: litho 3um resolution.jpg
 ---
+# Optical Diagram
+make diagram in HTML/SVG or latex diagram
+keep it simple: use simple elements like rectangles
+
+DMD: show as array of 4 rectangles. mark the pitch
+then beamsplitter
+one path goes down through microscope objective to wafer
+one half goes right to camera
+
+---
 # Digital Micromirror Device (DMD)
 
 https://spectrum.ieee.org/media-library/close-up-of-microscopic-square-tiles-with-holes-in-the-center-arranged-in-a-grid-pattern.jpg?id=25583281&width=1200&height=1200&coordinates=117%2C0%2C118%2C0
 
 
+---
+# Optical Specs
+NA: find from https://www.edmundoptics.in/p/10x-din-plan-commercial-grade-objective/5386
+Wavelength: 405nm
+Resolution: find from 1.22 lambda / NA. is this the correct formula? what does the 1.22 factor depend on?
 ---
 # How we built Litho
 

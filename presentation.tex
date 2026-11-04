@@ -5,6 +5,7 @@
 \usepackage{array}
 \usepackage{booktabs}
 \usepackage{qrcode}
+\usepackage{tikz}
 
 \definecolor{links}{HTML}{F54927}
 \hypersetup{colorlinks,linkcolor=,urlcolor=links,citecolor=gray}
@@ -170,15 +171,15 @@
           \textbf{Sr No} & \textbf{Tool Name} & \textbf{Resolution (nm)} & \textbf{Throughput (wafers/hr)} & \textbf{Cost (USD)} \\
           \midrule
           1 & ASML TWINSCAN EXE:5200B \newline {\scriptsize High-NA EUV scanner}\cite{asml,toms}
-            & 8 & 175 & $\sim$\$380M \\
+            & 8 & 175 & \$380M \\
           2 & IMS MBMW-101 / -301 \newline {\scriptsize multi-beam mask writer}\cite{ims,semieng,dataintelo}
-            & 14 & $\sim$0.1 \newline {\scriptsize \emph{masks}/hr} & \$30--80M \\
+            & 14 & 0.1 \newline {\scriptsize \emph{masks}/hr} & \$80M \\
           3 & Raith VOYAGER \newline {\scriptsize 50 kV e-beam lithography}\cite{raith}
-            & $\leq$8 & $\lesssim$0.02 & $\sim$\$1--5M \\
+            & 8 & 0.02 & \$5M \\
           4 & Durham Magneto Optics MicroWriter ML3 Pro \newline {\scriptsize maskless laser direct-write}\cite{dmo,nus}
-            & 600 & $\sim$0.1--0.4 & $\sim$\$0.2--0.5M \\
+            & 600 & 0.4 & \$0.5M \\
           5 & \textbf{HackerFab IITB Litho} \newline {\scriptsize DMD projection direct-write}
-            & 3000 & $\sim$0.003 & \textbf{\textless\$2k} \\
+            & 3000 & 0.003 & \textbf{\$2k} \\
           \bottomrule
         \end{tabular}
       }
@@ -208,11 +209,105 @@
   \picpair{4.4cm}{\setupimg}{Direct-write photolithography setup}{\resimg}{3 µm lines patterned by our system}
 \end{slide}
 
+%% ---------------------------------------------------------------- Optical diagram
+\begin{slide}{Optical Diagram}
+  \centering
+  \vspace{0.2cm}
+  \begin{tikzpicture}[scale=1.25, >=stealth, every node/.style={font=\footnotesize}]
+    \definecolor{uv}{HTML}{7B3FE4}
+    \definecolor{cam}{HTML}{F54927}
+    % DMD: 4 mirrors
+    \foreach \i in {0,1,2,3}
+      \fill[gray!45, draw=black] (\i*0.9, 6.2) rectangle ++(0.7, 0.25);
+    \node[anchor=east] at (-0.15, 6.32) {\textbf{DMD}};
+    \draw[|<->|, thin] (0, 6.7) -- (0.9, 6.7) node[midway, above] {\scriptsize pitch = 5.4 µm};
+    % DMD -> beamsplitter
+    \draw[uv, line width=2pt, ->] (1.25, 6.2) -- (1.25, 5.12);
+    \node[anchor=east, text=uv] at (1.1, 5.65) {405 nm pattern};
+    % beamsplitter
+    \draw[thick, fill=blue!6] (0.75, 4.1) rectangle (1.75, 5.1);
+    \draw[thick] (0.75, 4.1) -- (1.75, 5.1);
+    \node[anchor=east] at (0.65, 4.6) {\textbf{Beamsplitter}};
+    % beamsplitter -> objective
+    \draw[uv, line width=2pt, ->] (1.25, 4.1) -- (1.25, 3.42);
+    % objective
+    \draw[thick, fill=gray!20] (0.8, 3.4) -- (1.7, 3.4) -- (1.5, 2.4) -- (1.0, 2.4) -- cycle;
+    \node[anchor=east] at (0.75, 2.9) {\textbf{10x objective}};
+    \node[anchor=west] at (1.75, 2.9) {\scriptsize NA 0.25};
+    % focus onto wafer
+    \draw[uv, thick] (1.05, 2.4) -- (1.25, 1.82);
+    \draw[uv, thick] (1.45, 2.4) -- (1.25, 1.82);
+    % wafer
+    \fill[gray!70, draw=black] (0, 1.6) rectangle (2.5, 1.8);
+    \node[anchor=east] at (-0.15, 1.7) {\textbf{Wafer}};
+    \node[anchor=west] at (2.6, 1.7) {\scriptsize resist-coated};
+    % beamsplitter -> camera
+    \draw[cam, line width=2pt, ->] (1.75, 4.6) -- (3.88, 4.6);
+    \node[above, text=cam] at (2.8, 4.62) {\scriptsize image from wafer};
+    \draw[thick, fill=cam!15] (3.9, 4.25) rectangle (5.1, 4.95);
+    \node at (4.5, 4.6) {\textbf{Camera}};
+  \end{tikzpicture}
+\end{slide}
+
 %% ---------------------------------------------------------------- DMD
 \begin{slide}{Digital Micromirror Device (DMD)}
   \centering
-  \includegraphics[height=0.72\textheight,keepaspectratio]{media_claude/dmd_ieee_spectrum.jpg}\\
-  {\scriptsize \textit{Close-up of DMD micromirror array (IEEE Spectrum)}\cite{ieeedmd}}
+  \begin{tabular}{@{}c@{\hspace{0.6cm}}c@{}}
+    \includegraphics[height=0.55\textheight,keepaspectratio]{media_my/ti_dlp.png} &
+    \includegraphics[height=0.55\textheight,keepaspectratio]{media_claude/dmd_ieee_spectrum.jpg} \\
+    {\scriptsize \textit{TI DLPDLCR471TPEVM evaluation module}} &
+    {\scriptsize \textit{Close-up of DMD micromirrors (IEEE Spectrum)}\cite{ieeedmd}}
+  \end{tabular}
+
+  \vspace{0.3cm}
+  {\small
+    DLP471TP DMD\cite{ti471}: \textbf{5.4 µm mirror pitch}, 1920 $\times$ 1080 mirrors, $\pm$17° tilt, 0.47'' diagonal (10.37 $\times$ 5.83 mm)\\[2pt]
+    With $\approx$10x demagnification: $\approx$0.54 µm pixel and $\approx$1.0 $\times$ 0.58 mm field on the wafer
+  }
+\end{slide}
+
+%% ---------------------------------------------------------------- Optical specs
+\begin{slide}{Optical Specs}
+  \splitslide[0.42]{
+    {\small
+      \begin{enumerate}
+          \setlength\itemsep{4pt}
+        \item \textbf{Objective:} 10X DIN plan objective\cite{edmund}
+          \begin{enumerate}
+            \item NA = \textbf{0.25}
+            \item EFL = 15.37 mm, WD = 1.5 mm
+          \end{enumerate}
+        \item \textbf{Wavelength:} $\lambda$ = \textbf{405 nm}
+        \item \textbf{Diffraction limit:}
+          \begin{enumerate}
+            \item Airy disk diameter: $1.22\,\lambda/\mathrm{NA}$ = 1.98 µm
+            \item Rayleigh resolution: $0.61\,\lambda/\mathrm{NA}$ = \textbf{0.99 µm}
+          \end{enumerate}
+        \item \textbf{Measured:} 3 µm lines, so $k_1 = \mathrm{CD}\cdot\mathrm{NA}/\lambda \approx 1.85$. The optics are not what limits us.
+      \end{enumerate}
+    }
+  }{
+    \raggedright
+    {\small
+      \textbf{Is $1.22\,\lambda/\mathrm{NA}$ the right formula?}
+      \begin{enumerate}
+          \setlength\itemsep{3pt}
+        \item $1.22\,\lambda/\mathrm{NA}$ is the \emph{diameter} of the Airy disk, out to the first dark ring.
+        \item Two points are just resolved when one sits on the other's first dark ring (Rayleigh criterion), so the resolution is the \emph{radius}: $0.61\,\lambda/\mathrm{NA}$.
+        \item Lithography writes this as $\mathrm{CD} = k_1\,\lambda/\mathrm{NA}$.
+      \end{enumerate}
+
+      \smallskip
+      \textbf{What sets the 1.22?}
+      \begin{enumerate}
+          \setlength\itemsep{3pt}
+        \item \textbf{Pupil shape:} 1.22 = 3.83/$\pi$, the first zero of the Bessel function $J_1$, for a uniformly lit \emph{circular} aperture. A slit gives 1.0.
+        \item \textbf{Criterion:} Rayleigh 0.61, Abbe 0.5, Sparrow 0.47.
+        \item \textbf{Illumination coherence ($\sigma$):} coherent light resolves line/space down to a half-pitch of $0.5\,\lambda/\mathrm{NA}$; off-axis illumination gets down to $0.25\,\lambda/\mathrm{NA}$.
+        \item \textbf{In practice:} aberrations, defocus, the resist and the process push $k_1$ higher.
+      \end{enumerate}
+    }
+  }
 \end{slide}
 
 %% ---------------------------------------------------------------- How we built it
@@ -259,6 +354,8 @@
     \bibitem{nus} NUS E6 Nanofab, ``MicroWriter: Durham Magneto Optics ML3 Pro.'' \url{https://cde.nus.edu.sg/e6nanofab/microwriter-durham-magneto-optics-ml3-pro-class-10}
     \bibitem{cnbc} CNBC, image of ASML NXE:3400B EUV scanner. \url{https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTk3zVFs2LxehMMxF3rxeBNKeXYQnqXPUWnc33hxwZ4Q&s=10}
     \bibitem{ieeedmd} IEEE Spectrum, close-up of a digital micromirror device. \url{https://spectrum.ieee.org/media-library/close-up-of-microscopic-square-tiles-with-holes-in-the-center-arranged-in-a-grid-pattern.jpg?id=25583281}
+    \bibitem{ti471} Texas Instruments, ``DLP471TP 0.47 4K UHD DMD'' datasheet (DLPS173B). \url{https://www.ti.com/lit/gpn/DLP471TP}
+    \bibitem{edmund} Edmund Optics, ``10X DIN Plan Commercial Grade Objective.'' \url{https://www.edmundoptics.in/p/10x-din-plan-commercial-grade-objective/5386}
   \end{thebibliography}
 \end{frame}
 

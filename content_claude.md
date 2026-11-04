@@ -45,3 +45,18 @@
 - Throughput: it writes **masks, not wafers**, at ~10–12 h per 6" mask (≈0.1 masks/hr). [Semiconductor Engineering](https://semiengineering.com/multi-beam-mask-writing-finally-comes-of-age)
 - Cost: a market report puts multibeam mask writers at $30–80M per unit. [Dataintelo](https://dataintelo.com/report/global-multi-beam-mask-writer-market)
 - Image: [media_claude/ims_mbmw101.jpg](media_claude/ims_mbmw101.jpg)
+
+## Optics (HackerFab litho)
+
+- **Objective:** Edmund Optics 10X DIN Plan Commercial Grade. NA 0.25, EFL 15.37 mm, WD 1.5 mm. [Edmund Optics](https://www.edmundoptics.in/p/10x-din-plan-commercial-grade-objective/5386)
+- **DMD (TI DLPDLCR471TPEVM, uses the DLP471TP):** 5.4 µm mirror pitch, 1920 × 1080 mirrors, ±17° tilt, 0.47" diagonal (10.37 × 5.83 mm). [TI DLP471TP datasheet](https://www.ti.com/lit/gpn/DLP471TP). Image: [media_my/ti_dlp.png](media_my/ti_dlp.png)
+  - At ≈10x demagnification the DMD maps to ≈0.54 µm per pixel and a ≈1.04 × 0.58 mm field on the wafer. That matches the 1 mm 16:9 patch used for the throughput number.
+- **Diffraction limit at λ = 405 nm:**
+  - Airy disk diameter: 1.22 λ/NA = 1.98 µm
+  - Rayleigh resolution: 0.61 λ/NA = 0.99 µm
+  - The measured 3 µm CD gives k1 = CD·NA/λ ≈ 1.85, so the optics are not the limiting factor.
+- **Is 1.22 λ/NA the right formula?**
+  - 1.22 λ/NA is the Airy disk *diameter*. The Rayleigh two-point resolution is the radius, 0.61 λ/NA. Lithography writes it as CD = k1 λ/NA.
+  - The 1.22 comes from 3.832/π, the first zero of the Bessel function J1, for a uniformly lit circular pupil.
+  - It changes with the pupil shape (a slit gives 1.0), the criterion used (Rayleigh 0.61, Abbe 0.5, Sparrow 0.47), and the illumination coherence. Coherent illumination resolves a half-pitch of 0.5 λ/NA; off-axis illumination reaches 0.25 λ/NA.
+- **Slide 3 table:** ranges are replaced by their upper limits, as the user asked.
