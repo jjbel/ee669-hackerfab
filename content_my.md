@@ -6,6 +6,7 @@ For EE669 | Prof .Anil Kottantharayil
 QR code to https://hackerfabiitb.org/
 
 litho setup latest.jpg
+next to it: litho 3um resolution.jpg
 ---
 Slide 1 of "C:\Users\jaibe\OneDrive\IIT\A hackerfab\funding_proposal\presentation.tex"
 
@@ -23,6 +24,7 @@ https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTk3zVFs2LxehMMxF3rxeBNKeX
 # HackerFab Litho
 
 litho setup latest.jpg
+next to it: litho 3um resolution.jpg
 ---
 # Digital Micromirror Device (DMD)
 
@@ -34,9 +36,18 @@ https://spectrum.ieee.org/media-library/close-up-of-microscopic-square-tiles-wit
 
 
 ---
+# Q] Why only a 10x objective? why not use a 100x lens and get 500nm resolution?
+
+---
+# Characterising Performance of a Litho System
+Critical Dimension (CD) / Minimum Feature Size / Resolution
+Line/Space
+Latent Image
+Developed Image
 
 
-
+---
+EXTRA (IGNORE FOR PPT)
 # Sputter
 how we built it
 what to improve (RF source)
