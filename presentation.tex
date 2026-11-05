@@ -83,6 +83,11 @@
 \newcommand{\setupimg}{media_claude/litho_setup_latest_noexif.jpg}
 \newcommand{\resimg}{media_my/04_lab_photos/litho 3um resolution.jpg}
 
+% Full-slide page from hh.pdf (same 16:9 size), no footer
+\newcommand{\hhpage}[1]{{%
+  \setbeamertemplate{background canvas}{\includegraphics[page=#1,width=\paperwidth,height=\paperheight]{hh.pdf}}%
+  \begin{frame}[plain]\end{frame}}}
+
 \begin{document}
 
 %% ---------------------------------------------------------------- Title
@@ -91,7 +96,7 @@
   \begin{columns}[T]
     \begin{column}{0.78\textwidth}
       \begin{flushleft}
-        {\footnotesize HackerFab Guest Lecture \textbar{} 05-11-2026 \textbar{} Jai Bellare}\\[2pt]
+        {\footnotesize HackerFab Guest Lecture \textbar{} 05-11-2026 \textbar{} Jai Bellare, Rushat Dixit}\\[2pt]
         {\footnotesize For EE669 \textbar{} Prof.\ Anil Kottantharayil}\\[0.4cm]
         {\Large \textbf{HackerFab: India's first student-built fab}}
       \end{flushleft}
@@ -165,6 +170,9 @@
         \end{minipage}
   \end{enumerate}}
 \end{frame}
+
+%% ---------------------------------------------------------------- hh.pdf: toolchain overview
+\hhpage{3}
 
 %% ---------------------------------------------------------------- Section title
 \begin{frame}[c]
@@ -306,15 +314,6 @@
   }{
     \raggedright
     {\small
-      \textbf{Is $1.22\,\lambda/\mathrm{NA}$ the right formula?}
-      \begin{enumerate}
-          \setlength\itemsep{3pt}
-        \item $1.22\,\lambda/\mathrm{NA}$ is the \emph{diameter} of the Airy disk, out to the first dark ring.
-        \item Two points are just resolved when one sits on the other's first dark ring (Rayleigh criterion), so the resolution is the \emph{radius}: $0.61\,\lambda/\mathrm{NA}$.
-        \item Lithography writes this as $\mathrm{CD} = k_1\,\lambda/\mathrm{NA}$.
-      \end{enumerate}
-
-      \smallskip
       \textbf{What sets the 1.22?}
       \begin{enumerate}
           \setlength\itemsep{3pt}
@@ -332,6 +331,10 @@
   \centering
   {\LARGE \textbf{How we built Litho}}
 \end{frame}
+
+%% ---------------------------------------------------------------- hh.pdf: how we built litho, litho process
+\hhpage{9}
+\hhpage{12}
 
 %% ---------------------------------------------------------------- 10x objective question
 \begin{frame}[c]
@@ -394,6 +397,21 @@
   \centering
   \includegraphics[width=\linewidth,height=0.78\textheight,keepaspectratio]{media_my/02_litho_runs_and_process_data/process_runs/2026-07-07 furnace sputter ellipso profilo/furnace plot.png}
 \end{slide}
+
+%% ---------------------------------------------------------------- hh.pdf: furnace, sputter, evaporator, QCM, doping, MOSCAP, roadmap
+\hhpage{14}
+\hhpage{15}
+\hhpage{18}
+\hhpage{19}
+\hhpage{20}
+\hhpage{21}
+\hhpage{22}
+\hhpage{23}
+\hhpage{24}
+\hhpage{25}
+\hhpage{26}
+\hhpage{27}
+\hhpage{30}
 
 %% ---------------------------------------------------------------- Thanks
 \begin{frame}[c]
