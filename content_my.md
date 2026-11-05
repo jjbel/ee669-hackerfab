@@ -83,3 +83,21 @@ Questions?
 
 1. 10x > 100x 1000x
 2. profilo image 
+
+
+logo_test_060s_blue.png
+---
+2025-06-15_20um_1um/010x_die3.png, 050x_die3.png : res test
+1um to 20um lines.png : its corresponding pattern
+---
+100x_die2_top.png : interference colors
+---
+mosaic_edited.png : wafer fallen on floor
+---
+050x_die3_defect.png : dust particle defect
+---
+050x_die1.png : moved squares poor adhesion
+---
+10um_die2_10squares_200um.bmp
+---
+furnace plot.png
